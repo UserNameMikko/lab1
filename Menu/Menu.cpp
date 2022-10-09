@@ -18,78 +18,39 @@ void Menu::main_menu(){
                 delete_instrument();
                 break;
             case 6:
-                find_per();
+                find_cost_of_instrument();
                 break;
             case 7:
                 exit_from_program();
+                break;
+            default:
                 break;
         }
     }
 }
 int Menu::show_options() {
     int c;
-    std::cout << "1 - show all instruments\n2 - add new instrument\n3 - save all into the text file\n"
-                 "4 - load data from file\n5 - delete chosen instrument\n6 - \n7 - exit\n-> ";
-
+    std::cout << "1 - show all instruments\n2 - add a new instrument\n3 - save all instruments into the text file\n"
+                 "4 - load data from file\n5 - delete instrument\n6 - find cost of instrument stack(only one type)\n"
+                 "7 - exit\n-> ";
     std::cin >> c;
+    if (c < 1 || c > 7)
+        throw "bad number";
     return c;
 }
 
 void Menu::show_all_instruments() {
-    try{
-        if (list.get_size() == 0)
-            throw "list is empty";
-        for (int i = 0; i < list.get_size(); i++)
+    if (list.get_size() == 0)
+        throw "list is empty";
+    for (int i = 0; i < list.get_size(); i++)
             list[i]->show();
-    }
-    catch (const char* er){
-        std::cout << er << std::endl;
-    }
-
 }
-
-/*void Menu::change_data(){
-    int c2;
-    try{
-        std::cout << "Êàêóþ ôèãóðó õîòèòå èçìåíèòü?" << std::endl;
-        std::cout << "Ââåäèòå íîìåð ôèãóðû îò 1 äî " << list.get_size() << std::endl;
-        std::cin >> c2;
-        if (c2<1 || c2>list.get_size()) {
-            throw "index out of bounds";
-        }
-        list[c2 - 1]->show();
-        std::cout << "Êàêîé ïàðàìåòð íåîáõîäèìî ðåäàêòèðîâàòü?" << std::endl;
-        int par;
-        std::cout << "1 - Òèï" << std::endl;
-        std::cout << "2 - Ðàçìåðû" << std::endl;
-        std::cin >> par;
-        switch (par) {
-            case 1:
-                std::cout << "Ïðè ñìåíå òèïà ôèãóðû íåîáõîäèìî èçìåíèòü åå ðàçìåðû" << std::endl;
-                list[c2 - 1]->rewrite();
-                break;
-            case 2:
-                double a1, a2, a3;
-                std::cout << "Ââåäèòå òðè íîâûõ ðàçìåðà." << std::endl;
-                std::cout << "Åñëè ó ôèãóðû (íàïðèìåð êðóã) åñòü òîëüêî 1 ðàçìåð (ðàäèóñ), ââåäèòå ðàäèóñ, à îñòàëüíûå ïàðàìåòðû çàäàéòå íóëåì" << std::endl;
-                std::cin >> a1 >> a2 >> a3;
-                list[c2 - 1]->redact(a1, a2, a3);
-                break;
-        }
-        std::cout << "Äàííûå èçìåíåíû!" << std::endl;
-
-    }
-    catch (const char* err)
-    {
-        std::cout << err << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
-    }
-
-}*/
 void Menu::add_new(){
     int c;
     std::cout<<"which instrument i need to add?\n1 - Brass\n2 - Percussion\n3 - String\n-> ";
     std::cin >> c;
+    if (c < 1 || c > 3)
+        throw "bad number";
     switch (c) {
         case 1: // Brass
             Brass * brass;
@@ -124,9 +85,8 @@ void Menu::save_to_file(){
         list.save();
         std::cout << "successfully saved into data.txt" << std::endl;
     }
-    catch (...){
-        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
+    catch (std::exception exception){
+        std::cout << "something went wrong!" << std::endl << exception.what() << std::endl;
     }
 
 }
@@ -136,58 +96,35 @@ void Menu::load_from_file(){
 }
 void Menu::delete_instrument() {
     int c;
-    try {
-        if (list.get_size() == 0)
-            throw "list is empty!";
 
-    }
-    catch (...) {
-        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
-    }
+    if (list.get_size() == 0)
+        throw "list is empty!";
 
-    std::cout << "Êàêóþ ôèãóðó âû õîòèòå óäàëèòü?" << std::endl;
-    std::cout << "Ââåäèòå ÷èñëî îò 1 äî " << list.get_size() << std::endl;
-    /*for (int i = 0; i < list.get_size(); i++) {
-        list[i]->show();
-    }*/
-    try{
-        std::cin >> c;
-        if (c<1 || c>list.get_size())
-            throw"Ââåäåíî íåêîððåêòíîå ÷èñëî!";
-
-        list.remove(list.get_size()-c);
-        std::cout << "Âûáðàííàÿ ôèãóðà óäàëåíà" << std::endl;
-
-    }
-    catch (...){
-        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
-    }
+    std::cout << "Now you have " << list.get_size() <<" instruments"<<std::endl<<
+    "input an index of instrument which will be deleted";
+    std::cin >> c;
+    if (c < 1 || c > list.get_size()-1)
+        throw"index out of bounds";
+    list.remove(c-1);
+    std::cout << "instrument deleted successfully" << std::endl;
 
 }
-void Menu::find_per(){
+void Menu::find_cost_of_instrument(){
     int p;
-    try
-    {
+    try{
         for (int i = 0; i < list.get_size(); i++)
             list[i]->show();
-        std::cout <<" " << std::endl;
+        std::cout <<"input the instrument which cost of all instances you want to calculate: " << std::endl;
         std::cin >> p;
-        if (p<1 || p>list.get_size()) {
-            throw "Ââåäåíî íåêîððåêòíîå ÷èñëî!";
-        }
-       // std::cout << "Ïåðèìåòð: " << list[p1 - 1]->Per() << std::endl;
-
+        if (p<1 || p>list.get_size())
+            throw "index out of bounds";
+        std::cout<<"cost of all instances of current instrument: " <<
+        list[p - 1]->get_total_num() * list[p - 1]->get_cost()<<std::endl;
     }
-    catch (...)
-    {
-        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
+    catch (std::exception exception){
+        std::cout << "something went wrong!" << std::endl << exception.what() << std::endl;
     }
-
 }
-
 void Menu::exit_from_program(){
     exit = 0;
 }

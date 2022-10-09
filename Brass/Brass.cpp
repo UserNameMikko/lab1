@@ -64,8 +64,7 @@ void Brass::show() {
              "\ntotal number: "<<total_number<<
              "\nmanufacturer name: "<<manufacturer_name<<
              "\ndefects: "<<defects_description<<
-             "\n---------------------"<<
-             std::endl;
+             "\n---------------------" << std::endl;
 }
 void Brass::saving() {
     std::ofstream file_out;
@@ -74,7 +73,7 @@ void Brass::saving() {
     if (!file_out)
         throw "Error opening!";
     else {
-        file_out << 2 << std::endl << name << std::endl << cost << std::endl
+        file_out << 1 << std::endl << name << std::endl << cost << std::endl
                  << owner_name << std::endl << total_number << std::endl << manufacturer_name<< std::endl
                  << defects_description << std::endl;
         file_out.close();
@@ -84,7 +83,8 @@ void Brass::rewrite() {
     std::cout << "-------------------------------" << std::endl;
     std::cout << "Change data of Brass instrument\n"
                  "input:\n"
-                 "name -> cost -> owner name-> total number-> manufacturer name ->defects description"<< std::endl;
+                 "name -> cost -> owner name-> total number-> manufacturer name ->defects description"<<std::endl<<
+                 "if your text variables contains >1 word use '_' for current work of program"<< std::endl;
     std::cin>>this->name>>this->cost>>this->owner_name>>
     this->total_number>>this->manufacturer_name>>this->defects_description;
 }

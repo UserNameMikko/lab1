@@ -12,12 +12,11 @@ public:
     void main_menu();
     int show_options();
     void show_all_instruments();
-    void change_data();
     void add_new();
     void save_to_file();
     void load_from_file();
     void delete_instrument();
-    void find_per();
+    void find_cost_of_instrument();
     void exit_from_program();
 };
 #endif //LAB1_MENU_H

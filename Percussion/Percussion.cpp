@@ -78,12 +78,20 @@ void Percussion::rewrite() {
     std::cout << "-------------------------------" << std::endl;
     std::cout << "Change data of Percussion instrument\n"
                  "input:\n"
-                 "name -> cost -> owner name-> total number-> type"<< std::endl;
+                 "name -> cost -> owner name -> total number-> type"<< std::endl<<
+                 "if your text variables contains >1 word use '_' for current work of program"<<std::endl;
     try {
+        /*std::getline(std::cin, this->name, ' ');
+        std::cin>> this->cost;
+        std::getline(std::cin, this->owner_name,' ');
+        std::getline(std::cin, this->owner_name, ' ');
+        std::cin>> this->total_number;
+        std::getline(std::cin, this->type, ' ');*/
+
         std::cin>>this->name>>this->cost>>this->owner_name>>
                 this->total_number>>this->type;
     } catch (std::exception e) {
-        throw e;
+        std::cout<<e.what();
     }
 
 }

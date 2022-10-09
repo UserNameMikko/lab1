@@ -61,7 +61,8 @@ void Strings::show() {
         "\nowner name: "<<this->owner_name<<
         "\ntotal number: "<<this->total_number<<
         "\nmanufacturer name: "<<this->manufacturer_name<<
-        "\nshort description: "<<this->short_description<<std::endl;
+        "\nshort description: "<<this->short_description<<
+        "\n---------------------"<<std::endl;
 }
 void Strings::saving() {
     std::ofstream file_out;
@@ -70,7 +71,7 @@ void Strings::saving() {
     if (!file_out)
         throw "Error opening!";
     else {
-        file_out << 2 << std::endl << this->name << std::endl << this->cost << std::endl
+        file_out << 3 << std::endl << this->name << std::endl << this->cost << std::endl
                  << this->owner_name << std::endl << this->total_number << std::endl
                  << this->manufacturer_name << std::endl << this->short_description << std::endl;
         file_out.close();
@@ -80,7 +81,8 @@ void Strings::rewrite() {
     std::cout << "-------------------------------" << std::endl;
     std::cout << "Change data of Strings instrument\n"
                  "input:\n"
-                 "name -> cost -> owner name-> total number-> manufacturer name ->short description"<< std::endl;
+                 "name -> cost -> owner name-> total number-> manufacturer name ->short description"<<std::endl<<
+                 "if your text variables contains >1 word use '_' for current work of program"<< std::endl;
     std::cin>>this->name>>this->cost>>this->owner_name>>
     this->total_number>>this->manufacturer_name>>this->short_description;
 
