@@ -143,7 +143,7 @@ void Keeper::save() {
     std::string init_file = "data.txt";
     file_out.open(init_file, std::ios_base::app);
     if (!file_out)
-        throw "";
+        throw "no such file or directory!";
     else{
         file_out << size << std::endl;
         file_out.close();

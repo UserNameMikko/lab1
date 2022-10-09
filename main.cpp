@@ -27,10 +27,11 @@
  *  - какие дефекты присутствуют в инструменте (текстовое описание)(defects_description).
 */
 #include "Keeper/Keeper.h"
-
+#include "Menu/Menu.h"
 int main(){
-
-    Brass b;
+    Menu menu;
+    menu.main_menu();
+    /*Brass b;
     Percussion p;
     b.set_cost(2000.0);
     b.set_defects("nothing");
@@ -40,7 +41,7 @@ int main(){
     b.set_owner("Me");
     std::cout<<b.get_manufacture()<<"\n"<<b.get_cost()<<"\n"<<b.get_owner()<<"\n"
     <<b.get_defects()<<"\n"<<b.get_name()<<"\n"<<b.get_total_num()<<std::endl;
-    std::cout<<b;
+    std::cout<<b;*/
 
     return 0;
 }

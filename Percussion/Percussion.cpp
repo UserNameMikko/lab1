@@ -1,3 +1,4 @@
+#include <fstream>
 #include"Percussion.h"
 
 Percussion::Percussion(){
@@ -52,12 +53,38 @@ void Percussion::set_type(std::string _type){
 
 
 void Percussion::show() {
-
+    std::cout<<"---show percussion---\n"
+               "name: "<<name<<
+               "\ncost: "<<cost<<
+               "\ntype: "<<type<<
+               "\nowner name: "<<owner_name<<
+               "\ntotal number: "<<total_number<<
+               "\n---------------------"<<
+               std::endl;
 }
 void Percussion::saving() {
-
+    std::ofstream file_out;
+    std::string init_file = "data.txt";
+    file_out.open(init_file, std::ios_base::app);
+    if (!file_out)
+        throw "Error opening!";
+    else {
+        file_out << 2 << std::endl << name << std::endl << cost << std::endl
+        << owner_name << std::endl << total_number << std::endl << type << std::endl;
+        file_out.close();
+    }
 }
 void Percussion::rewrite() {
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "Change data of Percussion instrument\n"
+                 "input:\n"
+                 "name -> cost -> owner name-> total number-> type"<< std::endl;
+    try {
+        std::cin>>this->name>>this->cost>>this->owner_name>>
+                this->total_number>>this->type;
+    } catch (std::exception e) {
+        throw e;
+    }
 
 }
 Percussion::~Percussion() = default;

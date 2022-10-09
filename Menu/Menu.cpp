@@ -1,215 +1,193 @@
-/*#include "Menu.h"
-void Menu::main_menu()
-{
+#include "Menu.h"
+void Menu::main_menu(){
     while (exit == 1) {
-        switch (show_options())
-        {
+        switch (show_options()){
             case 1:
-                show_all_figures();
+                show_all_instruments();
                 break;
             case 2:
-                change_data();
-                break;
-            case 3:
                 add_new();
                 break;
-            case 4:
+            case 3:
                 save_to_file();
                 break;
-            case 5:
+            case 4:
                 load_from_file();
                 break;
-            case 6:
-                delete_figure();
+            case 5:
+                delete_instrument();
                 break;
-            case 7:
+            case 6:
                 find_per();
                 break;
-            case 8:
-                exit_from_programm();
+            case 7:
+                exit_from_program();
                 break;
         }
     }
 }
-int Menu::show_options()
-{
-    int c1;
-    std::cout << "" << std::endl;
-    std::cin >> c1;
-    return c1;
+int Menu::show_options() {
+    int c;
+    std::cout << "1 - show all instruments\n2 - add new instrument\n3 - save all into the text file\n"
+                 "4 - load data from file\n5 - delete chosen instrument\n6 - \n7 - exit\n-> ";
+
+    std::cin >> c;
+    return c;
 }
 
-void Menu::show_all_figures()
-{
-    try
-    {
-        if (list.get_size() == 0) {
-            throw "Ñïèñîê ïóñò! Âûâîäèòü íå÷åãî!";
-        }
-        for (int i = 0; i < list.get_size(); i++) {
+void Menu::show_all_instruments() {
+    try{
+        if (list.get_size() == 0)
+            throw "list is empty";
+        for (int i = 0; i < list.get_size(); i++)
             list[i]->show();
-        }
     }
-    catch (const char* er)
-    {
+    catch (const char* er){
         std::cout << er << std::endl;
-        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
 }
 
-void Menu::change_data()
-{
+/*void Menu::change_data(){
     int c2;
-    try
-    {
-        cout << "Êàêóþ ôèãóðó õîòèòå èçìåíèòü?" << endl;
-        cout << "Ââåäèòå íîìåð ôèãóðû îò 1 äî " << list.get_size() << endl;
-        cin >> c2;
+    try{
+        std::cout << "Êàêóþ ôèãóðó õîòèòå èçìåíèòü?" << std::endl;
+        std::cout << "Ââåäèòå íîìåð ôèãóðû îò 1 äî " << list.get_size() << std::endl;
+        std::cin >> c2;
         if (c2<1 || c2>list.get_size()) {
-            throw "Íåêîððåêòíûé íîìåð!";
+            throw "index out of bounds";
         }
         list[c2 - 1]->show();
-        cout << "Êàêîé ïàðàìåòð íåîáõîäèìî ðåäàêòèðîâàòü?" << endl;
+        std::cout << "Êàêîé ïàðàìåòð íåîáõîäèìî ðåäàêòèðîâàòü?" << std::endl;
         int par;
-        cout << "1 - Òèï" << endl;
-        cout << "2 - Ðàçìåðû" << endl;
-        cin >> par;
+        std::cout << "1 - Òèï" << std::endl;
+        std::cout << "2 - Ðàçìåðû" << std::endl;
+        std::cin >> par;
         switch (par) {
             case 1:
-                cout << "Ïðè ñìåíå òèïà ôèãóðû íåîáõîäèìî èçìåíèòü åå ðàçìåðû" << endl;
+                std::cout << "Ïðè ñìåíå òèïà ôèãóðû íåîáõîäèìî èçìåíèòü åå ðàçìåðû" << std::endl;
                 list[c2 - 1]->rewrite();
                 break;
             case 2:
                 double a1, a2, a3;
-                cout << "Ââåäèòå òðè íîâûõ ðàçìåðà." << endl;
-                cout << "Åñëè ó ôèãóðû (íàïðèìåð êðóã) åñòü òîëüêî 1 ðàçìåð (ðàäèóñ), ââåäèòå ðàäèóñ, à îñòàëüíûå ïàðàìåòðû çàäàéòå íóëåì" << endl;
-                cin >> a1 >> a2 >> a3;
+                std::cout << "Ââåäèòå òðè íîâûõ ðàçìåðà." << std::endl;
+                std::cout << "Åñëè ó ôèãóðû (íàïðèìåð êðóã) åñòü òîëüêî 1 ðàçìåð (ðàäèóñ), ââåäèòå ðàäèóñ, à îñòàëüíûå ïàðàìåòðû çàäàéòå íóëåì" << std::endl;
+                std::cin >> a1 >> a2 >> a3;
                 list[c2 - 1]->redact(a1, a2, a3);
                 break;
         }
-        cout << "Äàííûå èçìåíåíû!" << endl;
+        std::cout << "Äàííûå èçìåíåíû!" << std::endl;
 
     }
     catch (const char* err)
     {
-        cout << err << endl;
-        cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << endl;
+        std::cout << err << std::endl;
+        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
-}
-void Menu::add_new()
-{
-    int c3;
-    cout << "Êàêóþ ôèãóðó íåîáõîäèìî äîáàâèòü?" << endl;
-    cout << "1 - Ïëîñêàÿ" << endl;
-    cout << "2 - Îáúåìíàÿ" << endl;
-    cin >> c3;
-    switch (c3) {
-        case 1:
-            Flat * flat;
-            flat = new Flat;
-            figures = flat;
-            flat->rewrite();
+}*/
+void Menu::add_new(){
+    int c;
+    std::cout<<"which instrument i need to add?\n1 - Brass\n2 - Percussion\n3 - String\n-> ";
+    std::cin >> c;
+    switch (c) {
+        case 1: // Brass
+            Brass * brass;
+            brass = new Brass;
+            figures = brass;
+            brass->rewrite();
             list.insert(figures);
             break;
-        case 2:
-            Solid * solid;
-            solid = new Solid;
-            figures = solid;
-            solid->rewrite();
+        case 2: // Percussion
+            Percussion * percussion;
+            percussion = new Percussion;
+            figures = percussion;
+            percussion->rewrite();
+            list.insert(figures);
+            break;
+        case 3: // Strings
+            Strings* strings;
+            strings = new Strings;
+            figures = strings;
+            strings->rewrite();
             list.insert(figures);
             break;
         default:
             break;
     }
-    cout << "Íîâàÿ ôèãóðà áûëà äîáàâëåíà!" << endl;
+    std::cout << "success" << std::endl;
 }
-void Menu::save_to_file()
-{
-    try
-    {
-        if (list.get_size() == 0) {
-            throw "Ñïèñîê ïóñò! Ñîõðàíÿòü íå÷åãî!";
-        }
+void Menu::save_to_file(){
+    try{
+        if (list.get_size() == 0)
+            throw "list is empty";
         list.save();
-        cout << "Äàííûå ñîõðàíåíû â ôàéë data.txt" << endl;
+        std::cout << "successfully saved into data.txt" << std::endl;
     }
-    catch (...)
-    {
-        cout << "Âûçâàíî èñêëþ÷åíèå!" << endl;
-        cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << endl;
+    catch (...){
+        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
+        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
 }
-void Menu::load_from_file()
-{
+void Menu::load_from_file(){
     list.load();
-    cout << "Äàííûå èçâëå÷åíû èç ôàéëà!" << endl;
+    std::cout << "successfully restored from data.txt!" << std::endl;
 }
-void Menu::delete_figure()
-{
-    int c4;
-    try
-    {
-        if (list.get_size() == 0) {
-            throw "Ñïèñîê ïóñò!";
-        }
+void Menu::delete_instrument() {
+    int c;
+    try {
+        if (list.get_size() == 0)
+            throw "list is empty!";
+
     }
-    catch (...)
-    {
-        cout << "Âûçâàíî èñêëþ÷åíèå!" << endl;
-        cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << endl;
+    catch (...) {
+        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
+        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
-    cout << "Êàêóþ ôèãóðó âû õîòèòå óäàëèòü?" << endl;
-    cout << "Ââåäèòå ÷èñëî îò 1 äî " << list.get_size() << endl;
+    std::cout << "Êàêóþ ôèãóðó âû õîòèòå óäàëèòü?" << std::endl;
+    std::cout << "Ââåäèòå ÷èñëî îò 1 äî " << list.get_size() << std::endl;
     /*for (int i = 0; i < list.get_size(); i++) {
         list[i]->show();
-    }//
-    try
-    {
-        cin >> c4;
-        if (c4<1 || c4>list.get_size())
-        {
+    }*/
+    try{
+        std::cin >> c;
+        if (c<1 || c>list.get_size())
             throw"Ââåäåíî íåêîððåêòíîå ÷èñëî!";
-        }
-        list.remove(list.get_size()-c4);
-        cout << "Âûáðàííàÿ ôèãóðà óäàëåíà" << endl;
+
+        list.remove(list.get_size()-c);
+        std::cout << "Âûáðàííàÿ ôèãóðà óäàëåíà" << std::endl;
 
     }
-    catch (...)
-    {
-        cout << "Âûçâàíî èñêëþ÷åíèå!" << endl;
-        cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << endl;
+    catch (...){
+        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
+        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
 }
-void Menu::find_per()
-{
-    int p1;
+void Menu::find_per(){
+    int p;
     try
     {
-        for (int i = 0; i < list.get_size(); i++) {
+        for (int i = 0; i < list.get_size(); i++)
             list[i]->show();
-        }
-        cout << "Ââåäèòå íîìåð ôèãóðû, ïåðèìåòð èëè ïåðèìåòð îñíîâàíèÿ/ñå÷åíèÿ êîòîðîé íåîáõîäèìî íàéòè" << endl;
-        cin >> p1;
-        if (p1<1 || p1>list.get_size()) {
+        std::cout <<" " << std::endl;
+        std::cin >> p;
+        if (p<1 || p>list.get_size()) {
             throw "Ââåäåíî íåêîððåêòíîå ÷èñëî!";
         }
-        cout << "Ïåðèìåòð: " << list[p1 - 1]->Per() << endl;
+       // std::cout << "Ïåðèìåòð: " << list[p1 - 1]->Per() << std::endl;
 
     }
     catch (...)
     {
-        cout << "Âûçâàíî èñêëþ÷åíèå!" << endl;
-        cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << endl;
+        std::cout << "Âûçâàíî èñêëþ÷åíèå!" << std::endl;
+        std::cout << "Èñêëþ÷åíèå îáðàáîòàíî!" << std::endl;
     }
 
 }
 
-void Menu::exit_from_programm()
-{
+void Menu::exit_from_program(){
     exit = 0;
-}*/
+}

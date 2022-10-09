@@ -1,3 +1,4 @@
+#include <fstream>
 #include"Brass.h"
 
 std::string Brass::get_manufacture() {
@@ -56,13 +57,36 @@ Brass::Brass(const Brass &brass) {
     this->name = brass.name;
 }
 void Brass::show() {
-
+    std::cout<<"---show brass---\n"
+             "name: "<<name<<
+             "\nowner name: "<<owner_name<<
+             "\ncost: "<<cost<<
+             "\ntotal number: "<<total_number<<
+             "\nmanufacturer name: "<<manufacturer_name<<
+             "\ndefects: "<<defects_description<<
+             "\n---------------------"<<
+             std::endl;
 }
 void Brass::saving() {
-
+    std::ofstream file_out;
+    std::string init_file = "data.txt";
+    file_out.open(init_file, std::ios_base::app);
+    if (!file_out)
+        throw "Error opening!";
+    else {
+        file_out << 2 << std::endl << name << std::endl << cost << std::endl
+                 << owner_name << std::endl << total_number << std::endl << manufacturer_name<< std::endl
+                 << defects_description << std::endl;
+        file_out.close();
+    }
 }
 void Brass::rewrite() {
-
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "Change data of Brass instrument\n"
+                 "input:\n"
+                 "name -> cost -> owner name-> total number-> manufacturer name ->defects description"<< std::endl;
+    std::cin>>this->name>>this->cost>>this->owner_name>>
+    this->total_number>>this->manufacturer_name>>this->defects_description;
 }
 
 Brass::~Brass() = default;

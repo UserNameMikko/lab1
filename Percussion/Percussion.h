@@ -1,6 +1,5 @@
 #pragma once
 #include "../Orchestra/Orchestra.h"
-#include <vector>
 class Percussion: public Orchestra{
 private:
     std::string type;
@@ -26,14 +25,7 @@ public:
     void rewrite() override;
 
     friend std::ostream& operator<<(std::ostream& os, const Percussion& obj) {
-        std::vector<std::string> v;
-        v.push_back(obj.name);
-        v.push_back(obj.owner_name);
-        v.push_back(obj.type);
-        v.push_back(std::to_string(obj.total_number));
-        v.push_back(std::to_string(obj.cost));
-        for (int i = 0; i < v.size(); i++)
-            os << v[i] + " ";
+        os << obj.name<<"\n"<<obj.cost<<"\n"<<obj.owner_name<<"\n"<<obj.total_number<<"\n"<<obj.type<<std::endl;
         return os;
     }
 };
