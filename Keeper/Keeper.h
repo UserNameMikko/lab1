@@ -11,7 +11,7 @@ public:
     Keeper(int size);
     ~Keeper();
     int get_size();
-    Orchestra* operator[] ( const int index);
+    Orchestra* operator[] (const int index);
 
     void insert(Orchestra* n_data);
     void remove(int index);

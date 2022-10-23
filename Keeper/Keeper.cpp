@@ -106,6 +106,7 @@ void Keeper::load() {
             strings = new Strings;
             strings->set_name(name);
             strings->set_cost(cost);
+            strings->set_owner(owner_name);
             strings->set_total_num(total_number);
             strings->set_manufacture(manufacturer_name);
             strings->set_description(short_description);

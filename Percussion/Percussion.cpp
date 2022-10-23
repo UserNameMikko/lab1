@@ -53,14 +53,6 @@ void Percussion::set_type(std::string _type){
 
 
 void Percussion::show() {
-    /*std::cout<<"---show percussion---\n"
-               "name: "<<name<<
-               "\ncost: "<<cost<<
-               "\ntype: "<<type<<
-               "\nowner name: "<<owner_name<<
-               "\ntotal number: "<<total_number<<
-               "\n---------------------"<<
-               std::endl;*/
     std::cout << *this << std::endl;
 }
 void Percussion::saving() {
@@ -82,13 +74,6 @@ void Percussion::rewrite() {
                  "name -> cost -> owner name -> total number-> type"<< std::endl<<
                  "if your text variables contains >1 word use '_' for current work of program"<<std::endl;
     try {
-        /*std::getline(std::cin, this->name, ' ');
-        std::cin>> this->cost;
-        std::getline(std::cin, this->owner_name,' ');
-        std::getline(std::cin, this->owner_name, ' ');
-        std::cin>> this->total_number;
-        std::getline(std::cin, this->type, ' ');*/
-
         std::cin>>this->name>>this->cost>>this->owner_name>>
                 this->total_number>>this->type;
     } catch (std::exception e) {

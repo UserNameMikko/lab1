@@ -30,7 +30,7 @@ public:
     void rewrite() override;
 
     friend std::ostream& operator<<(std::ostream& os, const Strings& obj) {
-        os << "Type = Brass\n" << "name = " <<obj.name<<"\n"<< "cost = " <<obj.cost<<"\n"
+        os << "Type = Strings\n" << "name = " <<obj.name<<"\n"<< "cost = " <<obj.cost<<"\n"
            << "owner = " <<obj.owner_name<<"\n"<< "total = " <<obj.total_number<<"\n"<< "description = "
            <<obj.short_description <<std::endl;
         return os;
