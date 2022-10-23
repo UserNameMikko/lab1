@@ -1,6 +1,5 @@
 #pragma once
 #include"../Orchestra/Orchestra.h"
-#include <vector>
 class Strings: public Orchestra{
 private:
     std::string manufacturer_name;
