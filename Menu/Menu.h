@@ -6,7 +6,7 @@
 class Menu {
 protected:
     Keeper list;
-    Orchestra* figures;
+    Orchestra* instrument;
     int exit = 1;
 public:
     void main_menu();

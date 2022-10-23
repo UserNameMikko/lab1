@@ -55,14 +55,7 @@ std::string Strings::get_owner() {
 }
 
 void Strings::show() {
-    std::cout<<"---show strings--\n"
-        "name: "<<this->name<<
-        "\ncost: "<<this->cost<<
-        "\nowner name: "<<this->owner_name<<
-        "\ntotal number: "<<this->total_number<<
-        "\nmanufacturer name: "<<this->manufacturer_name<<
-        "\nshort description: "<<this->short_description<<
-        "\n---------------------"<<std::endl;
+   std::cout << *this << std::endl;
 }
 void Strings::saving() {
     std::ofstream file_out;

@@ -25,7 +25,8 @@ public:
     void rewrite() override;
 
     friend std::ostream& operator<<(std::ostream& os, const Percussion& obj) {
-        os << obj.name<<"\n"<<obj.cost<<"\n"<<obj.owner_name<<"\n"<<obj.total_number<<"\n"<<obj.type<<std::endl;
+        os << "Type = Percussion\n" << "name = " <<obj.name<<"\n"<< "cost = " <<obj.cost<<"\n"
+        << "owner = " <<obj.owner_name<<"\n"<< "total = " <<obj.total_number<<"\n"<< "type = " <<obj.type<<std::endl;
         return os;
     }
 };

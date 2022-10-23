@@ -57,14 +57,7 @@ Brass::Brass(const Brass &brass) {
     this->name = brass.name;
 }
 void Brass::show() {
-    std::cout<<"---show brass---\n"
-             "name: "<<name<<
-             "\nowner name: "<<owner_name<<
-             "\ncost: "<<cost<<
-             "\ntotal number: "<<total_number<<
-             "\nmanufacturer name: "<<manufacturer_name<<
-             "\ndefects: "<<defects_description<<
-             "\n---------------------" << std::endl;
+    std::cout << *this << std::endl;
 }
 void Brass::saving() {
     std::ofstream file_out;

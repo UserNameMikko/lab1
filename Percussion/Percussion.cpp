@@ -53,14 +53,15 @@ void Percussion::set_type(std::string _type){
 
 
 void Percussion::show() {
-    std::cout<<"---show percussion---\n"
+    /*std::cout<<"---show percussion---\n"
                "name: "<<name<<
                "\ncost: "<<cost<<
                "\ntype: "<<type<<
                "\nowner name: "<<owner_name<<
                "\ntotal number: "<<total_number<<
                "\n---------------------"<<
-               std::endl;
+               std::endl;*/
+    std::cout << *this << std::endl;
 }
 void Percussion::saving() {
     std::ofstream file_out;

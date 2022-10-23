@@ -40,10 +40,15 @@ int Menu::show_options() {
 }
 
 void Menu::show_all_instruments() {
-    if (list.get_size() == 0)
-        throw "list is empty";
-    for (int i = 0; i < list.get_size(); i++)
+    try {
+        if (list.get_size() == 0)
+            throw "list is empty";
+        for (int i = 0; i < list.get_size(); i++)
             list[i]->show();
+    } catch (...) {
+        std::cout<<"list size = 0"<<std::endl;
+    }
+
 }
 void Menu::add_new(){
     int c;
@@ -55,23 +60,23 @@ void Menu::add_new(){
         case 1: // Brass
             Brass * brass;
             brass = new Brass;
-            figures = brass;
+            instrument = brass;
             brass->rewrite();
-            list.insert(figures);
+            list.insert(instrument);
             break;
         case 2: // Percussion
             Percussion * percussion;
             percussion = new Percussion;
-            figures = percussion;
+            instrument = percussion;
             percussion->rewrite();
-            list.insert(figures);
+            list.insert(instrument);
             break;
         case 3: // Strings
             Strings* strings;
             strings = new Strings;
-            figures = strings;
+            instrument = strings;
             strings->rewrite();
-            list.insert(figures);
+            list.insert(instrument);
             break;
         default:
             break;

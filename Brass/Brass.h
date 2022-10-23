@@ -29,15 +29,9 @@ public:
     void rewrite() override;
 
     friend std::ostream& operator<<(std::ostream& os, const Brass& obj) {
-        std::vector<std::string> v;
-        v.push_back(obj.name);
-        v.push_back(obj.owner_name);
-        v.push_back(obj.manufacturer_name);
-        v.push_back(obj.defects_description);
-        v.push_back(std::to_string(obj.total_number));
-        v.push_back(std::to_string(obj.cost));
-        for (auto & i : v)
-            os << i + " ";
+        os << "Type = Brass\n" << "name = " <<obj.name<<"\n"<< "cost = " <<obj.cost<<"\n"
+           << "owner = " <<obj.owner_name<<"\n"<< "total = " <<obj.total_number<<"\n"<< "defects = "
+           <<obj.defects_description << std::endl;
         return os;
     }
 };
