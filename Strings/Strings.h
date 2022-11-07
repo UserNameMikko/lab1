@@ -28,6 +28,7 @@ public:
     void show() override;
     void saving() override;
     void rewrite() override;
+    void redact(std::string item1, double item2, std::string item3, int item4) override;
 
     friend std::ostream& operator<<(std::ostream& os, const Strings& obj) {
         os << "Type = Strings\n" << "name = " <<obj.name<<"\n"<< "cost = " <<obj.cost<<"\n"

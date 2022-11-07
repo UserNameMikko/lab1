@@ -25,7 +25,7 @@ public:
     virtual void show() = 0;
     virtual void saving() = 0;
     virtual void rewrite() = 0;
-
+    virtual void redact(std::string item1, double item2, std::string item3, int item4) = 0;
 
 };
 

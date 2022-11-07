@@ -20,8 +20,7 @@ Keeper::~Keeper() {
     }
 
 }
-Orchestra* Keeper::operator[] (const int index)
-{
+Orchestra* Keeper::operator[] (const int index) {
     if ((index >= size) || (index < 0))
         throw "Incorrect index!";
     else {
@@ -49,8 +48,7 @@ void Keeper::insert(Orchestra *_data) {
 }
 
 void Keeper::load() {
-    if (size != 0)
-    {
+    if (size != 0) {
         Instance * buffer;
         while (head->next != nullptr)
         {

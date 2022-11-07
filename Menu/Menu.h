@@ -17,6 +17,7 @@ public:
     void load_from_file();
     void delete_instrument();
     void find_cost_of_instrument();
+    void change_data();
     void exit_from_program();
 };
 #endif //LAB1_MENU_H

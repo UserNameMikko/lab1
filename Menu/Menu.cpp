@@ -21,6 +21,9 @@ void Menu::main_menu(){
                 find_cost_of_instrument();
                 break;
             case 7:
+                change_data();
+                break;
+            case 8:
                 exit_from_program();
                 break;
             default:
@@ -32,7 +35,7 @@ int Menu::show_options() {
     int c;
     std::cout << "1 - show all instruments\n2 - add a new instrument\n3 - save all instruments into the text file\n"
                  "4 - load data from file\n5 - delete instrument\n6 - find cost of instrument stack(only one type)\n"
-                 "7 - exit\n-> ";
+                 "7 - change data\n8 - exit\n-> ";
     std::cin >> c;
     if (c < 1 || c > 7)
         throw "bad number";
@@ -52,7 +55,7 @@ void Menu::show_all_instruments() {
 }
 void Menu::add_new(){
     int c;
-    std::cout<<"which instrument i need to add?\n1 - Brass\n2 - Percussion\n3 - String\n-> ";
+    std::cout<<"which instrument i need to add?\n1 - Brass\n2 - Percussion\n3 - String\n-> "<<std::endl;
     std::cin >> c;
     if (c < 1 || c > 3)
         throw "bad number";
@@ -82,6 +85,39 @@ void Menu::add_new(){
             break;
     }
     std::cout << "success" << std::endl;
+}
+
+void Menu::change_data() {
+    int c2;
+    try {
+        std::cout<<"choose an element"<<std::endl;
+        std::cin >> c2;
+        if (c2<1 || c2>list.get_size()) {
+            throw "incorrect index!";
+        }
+        list[c2 - 1]->show();
+        int par;
+        std::cout << "1 - recreate" << std::endl;
+        std::cout << "2 - redact" << std::endl;
+        std::cin >> par;
+        switch (par) {
+            case 1:
+
+                list[c2 - 1]->rewrite();
+                break;
+            case 2:
+                double _cost; std::string name, owner_name; int total;
+
+                std::cout<<"input name, cost, owner, total"<<std::endl;
+                std::cin >> name >> _cost >> owner_name >> total ;
+                list[c2 - 1]->redact(name, _cost, owner_name, total);
+                break;
+        }
+        std::cout<<"success"<<std::endl;
+    }
+    catch (const char* err) {
+        std::cout << err << std::endl;
+    }
 }
 void Menu::save_to_file(){
     try{

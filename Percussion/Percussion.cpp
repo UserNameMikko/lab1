@@ -81,4 +81,12 @@ void Percussion::rewrite() {
     }
 
 }
+void Percussion::redact(std::string item1, double item2, std::string item3, int item4) {
+    this->name = item1;
+    this->cost=item2;
+    this->owner_name=item3;
+    this->total_number = item4;
+
+}
+
 Percussion::~Percussion() = default;
